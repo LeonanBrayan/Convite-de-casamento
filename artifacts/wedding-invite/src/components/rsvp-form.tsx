@@ -3,7 +3,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Heart, Loader2 } from "lucide-react";
-import { useSubmitRsvp } from "@workspace/api-client-react";
+
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLScBO29I_nn1eq0CeHBgIP1D9-TneFP1_s4CjLr0ax6RjlVh_w/formResponse";
+
+const FIELD_IDS = {
+  guestName: "entry.1749626151",
+  whatsapp: "entry.784045655",
+  companions: "entry.1550992505",
+};
 
 const formSchema = z.object({
   guestName: z.string().min(2, "Por favor, insira seu nome completo."),
@@ -15,8 +23,8 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function RsvpForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const submitRsvpMutation = useSubmitRsvp();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const {
     register,
@@ -33,12 +41,28 @@ export default function RsvpForm() {
   });
 
   const onSubmit = async (data: FormValues) => {
+    setIsLoading(true);
+    setIsError(false);
     try {
-      await submitRsvpMutation.mutateAsync({ data });
+      const body = new URLSearchParams({
+        [FIELD_IDS.guestName]: data.guestName,
+        [FIELD_IDS.whatsapp]: data.whatsapp,
+        [FIELD_IDS.companions]: data.companions || "",
+      });
+
+      await fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+
       reset();
       setIsSubmitted(true);
-    } catch (error) {
-      console.error("Failed to submit RSVP:", error);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -123,7 +147,7 @@ export default function RsvpForm() {
           />
         </div>
 
-        {submitRsvpMutation.isError && (
+        {isError && (
           <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm text-center">
             Ocorreu um erro ao enviar. Por favor, tente novamente.
           </div>
@@ -131,10 +155,10 @@ export default function RsvpForm() {
 
         <button
           type="submit"
-          disabled={submitRsvpMutation.isPending}
+          disabled={isLoading}
           className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-primary/90 to-primary text-white font-serif text-lg tracking-wider shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
         >
-          {submitRsvpMutation.isPending ? (
+          {isLoading ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
               Enviando...
