@@ -1,4 +1,5 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import Home from "./pages/home";
 import NotFound from "./pages/not-found";
 
@@ -13,7 +14,7 @@ function Router() {
 
 function App() {
   return (
-    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+    <WouterRouter hook={useHashLocation}>
       <Router />
     </WouterRouter>
   );
