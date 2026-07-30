@@ -59,13 +59,6 @@ export default function Home() {
             </h1>
           </FadeIn>
           
-          <FadeIn delay={0.6}>
-            <img 
-              src={`${import.meta.env.BASE_URL}images/gold-ornament.png`} 
-              alt="ornament divider" 
-              className="h-12 md:h-16 mx-auto opacity-70 my-10 object-contain mix-blend-multiply" 
-            />
-          </FadeIn>
         </section>
 
         {/* DETAILS SECTION */}
@@ -116,17 +109,63 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ATTIRE SECTION */}
+        <section className="w-full text-center mb-32">
+          <FadeIn>
+            <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-4">
+              Traje
+            </h2>
+            <p className="font-sans text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+              O traje indicado para a cerimônia é <strong className="text-foreground font-medium">semi-formal</strong>.
+              Pedimos que os convidados evitem trajes na cor <strong className="text-foreground font-medium">azul</strong>,
+              pois esta cor será reservada ao noivo e aos padrinhos.
+              Agradecemos imensamente pela compreensão! 🤍
+            </p>
+          </FadeIn>
+
+          {/* Attire observation */}
+          <FadeIn delay={0.15}>
+            <div className="inline-flex items-start gap-3 bg-primary/10 border border-primary/30 rounded-2xl px-6 py-4 max-w-lg mx-auto mb-12 text-left">
+              <span className="text-primary text-lg mt-0.5">⚠️</span>
+              <p className="font-sans text-sm text-foreground/80 leading-relaxed">
+                <strong className="text-foreground">Observação:</strong> Por favor, evite usar roupas na cor{" "}
+                <strong className="text-foreground">azul</strong>. Essa cor será reservada ao noivo e aos padrinhos.
+                Agradecemos pela compreensão! 💙
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* Attire example images */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <FadeIn delay={0.2} className="flex flex-col items-center">
+              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl shadow-primary/10 border border-white/60 mb-4 bg-white/40">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/attire-man.jpg`}
+                  alt="Exemplo de traje semi-formal masculino"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <p className="font-serif text-xl text-foreground">Masculino</p>
+              <p className="font-sans text-sm text-muted-foreground mt-1">Blazer, calça social e sapato</p>
+            </FadeIn>
+
+            <FadeIn delay={0.35} className="flex flex-col items-center">
+              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl shadow-primary/10 border border-white/60 mb-4 bg-white/40">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/attire-woman.jpg`}
+                  alt="Exemplo de traje semi-formal feminino"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <p className="font-serif text-xl text-foreground">Feminino</p>
+              <p className="font-sans text-sm text-muted-foreground mt-1">Vestido ou conjunto elegante</p>
+            </FadeIn>
+          </div>
+        </section>
+
         {/* RSVP SECTION */}
         <section className="w-full mb-20 relative">
           <FadeIn>
-            <div className="text-center mb-10">
-              <img 
-                src={`${import.meta.env.BASE_URL}images/gold-ornament.png`} 
-                alt="ornament divider" 
-                className="h-10 mx-auto opacity-50 mb-10 object-contain mix-blend-multiply" 
-              />
-            </div>
-            
             <RsvpForm />
             
           </FadeIn>
