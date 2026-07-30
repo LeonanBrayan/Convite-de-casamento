@@ -135,32 +135,16 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          {/* Attire example images */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
-            <FadeIn delay={0.2} className="flex flex-col items-center">
-              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl shadow-primary/10 border border-white/60 mb-4 bg-white/40">
-                <img
-                  src={`${import.meta.env.BASE_URL}images/attire-man.jpg`}
-                  alt="Exemplo de traje semi-formal masculino"
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              <p className="font-serif text-xl text-foreground">Masculino</p>
-              <p className="font-sans text-sm text-muted-foreground mt-1">Blazer, calça social e sapato</p>
-            </FadeIn>
-
-            <FadeIn delay={0.35} className="flex flex-col items-center">
-              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl shadow-primary/10 border border-white/60 mb-4 bg-white/40">
-                <img
-                  src={`${import.meta.env.BASE_URL}images/attire-woman.jpg`}
-                  alt="Exemplo de traje semi-formal feminino"
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              <p className="font-serif text-xl text-foreground">Feminino</p>
-              <p className="font-sans text-sm text-muted-foreground mt-1">Vestido ou conjunto elegante</p>
-            </FadeIn>
-          </div>
+          {/* Attire example image */}
+          <FadeIn delay={0.2} className="flex justify-center">
+            <div className="w-full max-w-lg rounded-2xl overflow-hidden shadow-xl shadow-primary/10 border border-white/60 bg-white/40">
+              <img
+                src={`${import.meta.env.BASE_URL}images/attire-example.png`}
+                alt="Exemplo de traje semi-formal para homens e mulheres"
+                className="w-full h-auto hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </FadeIn>
         </section>
 
         {/* RSVP SECTION */}
